@@ -1,4 +1,5 @@
-# TalentScout-Hiring-Assistant
+# 🤖 TalentScout Hiring Assistant
+
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
 ![Groq](https://img.shields.io/badge/AI-Llama%203.3-orange)
@@ -29,16 +30,23 @@
 
 Follow these steps to run the application locally.
 
-### Install Dependencies
-1.Ensure you have Python installed, then run:
+### 1. Setup Project Folder
+1. Create a new folder named `TalentScout`.
+2. Copy the source code files (provided below) into this folder.
 
+### 2. Install Dependencies
+Open your terminal in the `TalentScout` folder and run:
+```
 pip install -r requirements.txt
-2. Run the Application
+```
+3. Run the Application
+```
 
-streamlit run app.py
+streamlit run talentscout_app.py
+```
 The app will open in your browser at http://localhost:8501.
 
-3. API Configuration
+4. API Configuration
 Option A (Recommended): Enter your free Groq API Key in the app sidebar for full AI functionality.
 
 Option B: Leave the key blank to use Mock Mode (simulated responses for testing UI flow).
@@ -54,14 +62,15 @@ Context Injection: User inputs (like name and tech stack) are dynamically inject
 
 📂 Project Structure
 Plaintext
-
+```
 TalentScout/
-├── app.py              # Main application entry point (UI & State Management)
+├── talentscout_app.py  # Main application entry point (UI & State Management)
 ├── llm_handler.py      # Logic for Groq API integration & Mock fallback
 ├── utils.py            # Helper functions (Data saving, Sentiment Analysis, Regex)
 ├── prompts.py          # Centralized system prompts & templates
 ├── requirements.txt    # Project dependencies
 └── README.md           # Documentation
+```
 ☁️ Deployment (Azure)
 This project is configured for deployment on Azure App Service.
 
@@ -71,16 +80,18 @@ Deploy Code: Connect your GitHub repository via the Deployment Center.
 
 Startup Command: Configure the startup command in Settings > Configuration:
 
+```
 
-python -m streamlit run app.py --server.port 8000 --server.address 0.0.0.0
+python -m streamlit run talentscout_app.py --server.port 8000 --server.address 0.0.0.0
+```
 🛡️ Challenges & Solutions
 Challenge: The LLM sometimes generated generic questions.
 
 Solution: Refined the prompt to explicitly request "One conceptual, one scenario, and one tool-specific question," significantly improving relevance.
 
-Challenge: Handling conversation flow (e.g., stopping the user from going off-topic).
+Challenge: Handling conversation flow.
 
-Solution: Implemented a state-machine logic in app.py that strictly guides the user through the stages (gather_name -> gather_stack -> quiz).
+Solution: Implemented a state-machine logic in talentscout_app.py that strictly guides the user through the stages (gather_name -> gather_stack -> quiz).
 
 Challenge: API Costs during testing.
 
