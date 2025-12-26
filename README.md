@@ -39,19 +39,19 @@ Open your terminal in the `TalentScout` folder and run:
 ```
 pip install -r requirements.txt
 ```
-###3. Run the Application
+### 3. Run the Application
 ```
 
 streamlit run talentscout_app.py
 ```
 The app will open in your browser at http://localhost:8501.
 
-###4. API Configuration
+### 4. API Configuration
 Option A (Recommended): Enter your free Groq API Key in the app sidebar for full AI functionality.
 
 Option B: Leave the key blank to use Mock Mode (simulated responses for testing UI flow).
 
-##🧠 Prompt Engineering Strategy
+## 🧠 Prompt Engineering Strategy
 The chatbot relies on a modular prompt design (prompts.py) to ensure consistency and quality:
 
 System Role: Defines the persona ("Scout") with strict guidelines to remain professional, empathetic, and focused solely on recruitment.
@@ -60,7 +60,7 @@ Structured Output: The TECH_QUESTION_PROMPT is engineered to force the LLM to re
 
 Context Injection: User inputs (like name and tech stack) are dynamically injected into prompts to make every interaction feel personalized.
 
-##📂 Project Structure
+## 📂 Project Structure
 Plaintext
 ```
 TalentScout/
@@ -71,7 +71,7 @@ TalentScout/
 ├── requirements.txt    # Project dependencies
 └── README.md           # Documentation
 ```
-##☁️ Deployment (Azure)
+## ☁️ Deployment (Azure)
 This project is configured for deployment on Azure App Service.
 
 Create Resource: Create a Web App on Azure (Python 3.9).
@@ -84,7 +84,7 @@ Startup Command: Configure the startup command in Settings > Configuration:
 
 python -m streamlit run talentscout_app.py --server.port 8000 --server.address 0.0.0.0
 ```
-##🛡️ Challenges & Solutions
+## 🛡️ Challenges & Solutions
 Challenge: The LLM sometimes generated generic questions.
 
 Solution: Refined the prompt to explicitly request "One conceptual, one scenario, and one tool-specific question," significantly improving relevance.
