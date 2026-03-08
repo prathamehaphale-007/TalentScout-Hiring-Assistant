@@ -2,97 +2,294 @@
 
 ![Python](https://img.shields.io/badge/Python-3.9%2B-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
-![Groq](https://img.shields.io/badge/AI-Llama%203.3-orange)
+![LLM](https://img.shields.io/badge/LLM-Llama%203.3-orange)
 ![Azure](https://img.shields.io/badge/Deployment-Azure-0078D4)
 
-**TalentScout** is an intelligent chatbot designed to streamline the preliminary candidate screening process for recruitment agencies. By leveraging Large Language Models (LLMs), it engages candidates in a natural conversation to gather essential information and assesses their technical proficiency with dynamically generated questions tailored to their specific tech stack.
+**TalentScout Hiring Assistant** is an AI-powered chatbot designed to automate the initial candidate screening process for recruitment agencies.
 
-## 🌟 Features
+The system conducts conversational interviews, collects candidate technical background, dynamically generates technical questions using a Large Language Model, analyzes response sentiment, and stores candidate information for recruiter review.
 
-* **Context-Aware Conversation:** Maintains memory of the candidate's name and previous inputs for a seamless flow.
-* **Dynamic Question Generation:** Uses **Groq Llama 3.3** to create specific technical questions (Conceptual, Scenario-based, & Tool-specific) based on the user's declared tech stack (e.g., Python, React, AWS).
-* **📊 Sentiment Analysis (Bonus):** Real-time analysis of the candidate's communication tone (Positive/Neutral/Negative) displayed in the UI sidebar.
-* **Data Persistence:** Automatically saves candidate profiles and interview responses to a secure local CSV database (`candidates_db.csv`).
-* **Robust Error Handling:** Includes a "Mock Mode" fallback if the API service is unavailable, ensuring the demo never breaks.
-* **Cloud Deployment:** Fully deployable to **Microsoft Azure App Service**.
-
-## 🛠️ Tech Stack
-
-* **Frontend:** [Streamlit](https://streamlit.io/) (for a clean, responsive chat interface).
-* **LLM Engine:** [Groq API](https://groq.com/) (running Llama-3.3-70b-versatile).
-* **Sentiment Analysis:** `TextBlob`.
-* **Data Handling:** `pandas` (CSV management).
-* **Deployment:** Microsoft Azure.
+This project demonstrates how **LLMs can streamline recruitment workflows and reduce manual screening effort.**
 
 ---
 
-## 🚀 Installation & Setup
+# 🌟 Key Features
 
-Follow these steps to run the application locally.
+## 🧠 Context-Aware Conversation
 
-### 1. Setup Project Folder
-1. Create a new folder named `TalentScout`.
-2. Copy the source code files (provided below) into this folder.
+The chatbot maintains conversation memory and remembers:
 
-### 2. Install Dependencies
-Open your terminal in the `TalentScout` folder and run:
+- Candidate name  
+- Technology stack  
+- Previous responses  
+
+This creates a natural conversational interview experience.
+
+---
+
+## ⚙️ Dynamic Technical Question Generation
+
+Using **Groq Llama 3.3**, the assistant generates customized interview questions based on the candidate’s declared tech stack.
+
+Examples include:
+
+- Python  
+- React  
+- AWS  
+- Data Engineering tools  
+
+Each candidate receives:
+
+- **Conceptual Question**
+- **Scenario-Based Question**
+- **Tool-Specific Question**
+
+This ensures a balanced technical assessment.
+
+---
+
+## 📊 Sentiment Analysis
+
+Candidate responses are analyzed using **TextBlob**.
+
+The system classifies responses as:
+
+- Positive
+- Neutral
+- Negative
+
+The sentiment score is displayed in the **Streamlit sidebar** to provide additional insights into candidate communication tone.
+
+---
+
+## 💾 Candidate Data Persistence
+
+Candidate information is automatically stored in a CSV database.
+
+Example file:
+
+`candidates_db.csv`
+
+Stored data includes:
+
+- Candidate name  
+- Tech stack  
+- Interview responses  
+- Sentiment score  
+
+This acts as a lightweight candidate tracking system.
+
+---
+
+## 🛡️ Robust Fail-Safe System
+
+The application includes a **Mock Mode fallback**.
+
+If the Groq API is unavailable:
+
+- The system generates simulated responses
+- The UI remains fully functional
+- Demonstrations never fail due to API issues
+
+---
+
+## ☁️ Cloud Deployment Ready
+
+The application can be deployed on **Microsoft Azure App Service**, enabling recruiters to access the chatbot through a browser.
+
+---
+
+# 🧱 System Architecture
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/504dd016-295b-4f20-bed1-6e4f9c2cca10"
+       alt="TalentScout System Architecture"
+       width="700">
+</p>
+
+```
+Candidate Interaction  
+↓  
+Streamlit Chat Interface  
+↓  
+Conversation Manager  
+↓  
+LLM Handler (Groq API)  
+↓  
+Technical Question Generation  
+↓  
+Sentiment Analysis (TextBlob)  
+↓  
+Candidate Data Storage (CSV)  
+↓  
+Recruiter Review  
+```
+---
+
+# 🛠️ Technology Stack
+
+| Technology | Purpose |
+|-----------|--------|
+| **Python** | Core application logic |
+| **Streamlit** | Interactive chat interface |
+| **Groq API** | LLM-powered question generation |
+| **TextBlob** | Sentiment analysis |
+| **Pandas** | Data storage & processing |
+| **Azure App Service** | Cloud deployment |
+
+---
+
+# 📂 Project Structure
+
+```
+TalentScout/
+
+talentscout_app.py → Main Streamlit application  
+
+llm_handler.py → Groq API integration & mock fallback  
+
+utils.py → Helper functions (sentiment analysis, storage, regex)
+
+prompts.py → Prompt templates for LLM interaction  
+
+requirements.txt → Project dependencies  
+
+README.md → Documentation  
+```
+---
+
+# 🚀 Installation & Setup
+
+Follow these steps to run the project locally.
+
+### 1️⃣ Clone the Repository
+
+```
+git clone https://github.com/prathamehaphale-007/TalentScout-Hiring-Assistant.git
+
+cd TalentScout-Hiring-Assistant
+```
+---
+
+### 2️⃣ Install Dependencies
+
 ```
 pip install -r requirements.txt
 ```
-### 3. Run the Application
-```
+---
+
+### 3️⃣ Run the Application
 
 streamlit run talentscout_app.py
-```
-The app will open in your browser at http://localhost:8501.
 
-### 4. API Configuration
-Option A (Recommended): Enter your free Groq API Key in the app sidebar for full AI functionality.
-
-Option B: Leave the key blank to use Mock Mode (simulated responses for testing UI flow).
-
-## 🧠 Prompt Engineering Strategy
-The chatbot relies on a modular prompt design (prompts.py) to ensure consistency and quality:
-
-System Role: Defines the persona ("Scout") with strict guidelines to remain professional, empathetic, and focused solely on recruitment.
-
-Structured Output: The TECH_QUESTION_PROMPT is engineered to force the LLM to return exactly three distinct types of questions (Conceptual, Scenario, Tool) to ensure a comprehensive assessment.
-
-Context Injection: User inputs (like name and tech stack) are dynamically injected into prompts to make every interaction feel personalized.
-
-## 📂 Project Structure
-Plaintext
-```
-TalentScout/
-├── talentscout_app.py  # Main application entry point (UI & State Management)
-├── llm_handler.py      # Logic for Groq API integration & Mock fallback
-├── utils.py            # Helper functions (Data saving, Sentiment Analysis, Regex)
-├── prompts.py          # Centralized system prompts & templates
-├── requirements.txt    # Project dependencies
-└── README.md           # Documentation
-```
-## ☁️ Deployment (Azure)
-This project is configured for deployment on Azure App Service.
-
-Create Resource: Create a Web App on Azure (Python 3.9).
-
-Deploy Code: Connect your GitHub repository via the Deployment Center.
-
-Startup Command: Configure the startup command in Settings > Configuration:
+The application will open at:
 
 ```
+http://localhost:8501
+```
+---
 
+# 🔑 API Configuration
+
+The application supports two modes.
+
+### Option A — Full AI Mode
+
+Enter your **Groq API Key** in the sidebar for full AI-powered responses.
+
+---
+
+### Option B — Mock Mode
+
+Leave the API key empty.
+
+The system will simulate responses for demonstration and UI testing.
+
+---
+
+# 🧠 Prompt Engineering Strategy
+
+The chatbot uses structured prompts to ensure consistent LLM outputs.
+
+**System Role**
+
+Defines the chatbot persona **Scout**, a professional recruitment assistant focused on candidate screening.
+
+**Structured Output**
+
+Prompts instruct the model to generate:
+
+- One conceptual question  
+- One scenario-based question  
+- One tool-specific question  
+
+This ensures structured technical evaluation.
+
+**Context Injection**
+
+User inputs such as candidate name and tech stack are dynamically injected into prompts to create personalized interactions.
+
+---
+
+# ☁️ Deployment (Azure)
+
+This project can be deployed to **Azure App Service**.
+
+### Deployment Steps
+
+1. Create a **Python Web App** on Azure  
+2. Connect your **GitHub repository** through Deployment Center  
+3. Configure the startup command  
+
+Startup command:
+
+```
 python -m streamlit run talentscout_app.py --server.port 8000 --server.address 0.0.0.0
 ```
-## 🛡️ Challenges & Solutions
-Challenge: The LLM sometimes generated generic questions.
+---
 
-Solution: Refined the prompt to explicitly request "One conceptual, one scenario, and one tool-specific question," significantly improving relevance.
+# 🛡️ Challenges & Solutions
 
-Challenge: Handling conversation flow.
+### Challenge  
+LLM occasionally generated generic interview questions.
 
-Solution: Implemented a state-machine logic in talentscout_app.py that strictly guides the user through the stages (gather_name -> gather_stack -> quiz).
+### Solution  
+Improved prompts to explicitly request:
 
-Challenge: API Costs during testing.
+- One conceptual question  
+- One scenario-based question  
+- One tool-specific question  
 
-Solution: Implemented a "Mock Mode" in llm_handler.py that simulates AI responses without making API calls.
+This significantly improved question quality.
+
+---
+
+### Challenge  
+Managing conversation flow in the chatbot.
+
+### Solution  
+Implemented a **state-machine workflow** guiding interaction stages:
+
+gather_name → gather_stack → interview → evaluation
+
+---
+
+### Challenge  
+High API usage during development.
+
+### Solution  
+Implemented **Mock Mode** to simulate responses without making API calls.
+
+---
+
+# 👨‍💻 Author
+
+**Prathmesh Aphale**
+
+AI Engineering • Data Science • Intelligent Systems
+
+---
+
+# ⭐ Support
+
+If you found this project useful, consider giving the repository a **star ⭐**.
